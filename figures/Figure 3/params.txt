@@ -1,0 +1,12 @@
+--- Fit quality ---
+\chi^2 / ndf. = 0.123
+
+--- Fit values ---
+Diffusion constant: 
+(1.286 +- 0.028) * 10^5 {\mu}m^2 / h
+mu g_max: 
+(3.334 +- 0.012) 1 / h
+Initial nutrients: 
+(4.676 +- 0.092) * 10^-2
+Monod constant: 
+(2.747 +- 0.059)* 10^-2
