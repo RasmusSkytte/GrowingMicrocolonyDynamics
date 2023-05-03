@@ -21,7 +21,7 @@ nd = 25;
 T_i = nan(nd, 1);
 
 % Define thresholds
-thresholds = 1:0.1:2.5;
+thresholds = unique([1:0.1:2.5 1.8:0.025:2.0]); % Adding extra fidelity around where \nu seems to be
 
 % Prepare data sets
 datasets  = cell(numel(thresholds), 1);
@@ -42,40 +42,7 @@ I(~l) = (5-(6-floor(d(~l)/10)) / 2)*5 + mod(d(~l), 10);
 for k = 1:numel(thresholds)
 
     % Loop over all thresholds
-    switch k
-        case 1
-            GFP_radius = GFP_radius_1_00;
-        case 2
-            GFP_radius = GFP_radius_1_10;
-        case 3
-            GFP_radius = GFP_radius_1_20;
-        case 4
-            GFP_radius = GFP_radius_1_30;
-        case 5
-            GFP_radius = GFP_radius_1_40;
-        case 6
-            GFP_radius = GFP_radius_1_50;
-        case 7
-            GFP_radius = GFP_radius_1_60;
-        case 8
-            GFP_radius = GFP_radius_1_70;
-        case 9
-            GFP_radius = GFP_radius_1_80;
-        case 10
-            GFP_radius = GFP_radius_1_90;
-        case 11
-            GFP_radius = GFP_radius_2_00;
-        case 12
-            GFP_radius = GFP_radius_2_10;
-        case 13
-            GFP_radius = GFP_radius_2_20;
-        case 14
-            GFP_radius = GFP_radius_2_30;
-        case 15
-            GFP_radius = GFP_radius_2_40;
-        case 16
-            GFP_radius = GFP_radius_2_50;
-    end
+    eval(['GFP_radius = GFP_radius_' strrep(sprintf('%.2f', thresholds(k)), '.', '_')])
 
     % Replace NaN values
     GFP_radius(isnan(GFP_radius)) = 0;
@@ -134,16 +101,21 @@ for k = 1:numel(thresholds)
 
     else
         fitImprovement = 1;
-        tpath1 = sprintf('%s/Params_%s.mat', sdir, strrep(sprintf('%.1f', thresholds(k)-0.1), '.', '_'));
-        tpath2 = sprintf('%s/Params_%s.mat', sdir, strrep(sprintf('%.1f', thresholds(k)+0.1), '.', '_'));
-        if exist(tpath1, 'file')
-            load(tpath1, 'y');
-            y0  = y;
-        elseif exist(tpath2, 'file')
-            load(tpath2, 'y');
-            y0  = y;
+        if k < numel(thresholds)
+            tpath = sprintf('%s/Params_%s.mat', sdir, strrep(sprintf('%.1f', thresholds(k+1)), '.', '_'));
+            if exist(tpath, 'file')
+                load(tpath, 'y');
+                y0  = y;
+            end
+        
+        elseif k > 1
+            tpath = sprintf('%s/Params_%s.mat', sdir, strrep(sprintf('%.1f', thresholds(k-1)), '.', '_'));
+            if exist(tpath, 'file')
+                load(tpath, 'y');
+                y0  = y;
+            end
         else
-            y0  = [2.78  16.73  1];
+            y0  = [10^0.5  10  1];
         end
     end
 

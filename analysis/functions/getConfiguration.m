@@ -18,6 +18,13 @@ if numel(varargin) > 0
     p.nu      = varargin{1}(3);  % dead density effect
 
     p.model   = varargin{2};
+
+    % Set episilon = 1 for a sensitivity analysis
+    if p.model == 3
+        p.epsilon = 1
+    elseif p.model == 4
+        p.dR = 1
+    end
 else
     p.dR      = 0;
     p.epsilon = 0;
@@ -30,4 +37,5 @@ end
 p.r_max = 2000;
 p.dr = 0.05;
 p.k = 1.02;
+
 end

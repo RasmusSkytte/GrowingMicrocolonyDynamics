@@ -1,7 +1,7 @@
 close all; clearvars;
 
 % Define thresholds
-thresholds = 1:0.1:2.5;
+thresholds = unique([1:0.1:2.5 1.8:0.025:2.0]); % Adding extra fidelity around where \nu seems to be
 
 % Prepare data
 fits = cell(numel(thresholds), 1);

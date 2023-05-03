@@ -9,7 +9,7 @@ end
 % Set starting parameters
 
 %    dR        epsilon  nu
-y0 = [10^0.5   10    0  ];
+y0 = [30   1    0  ];
 
 % Load the best fitting parameters (bacteria parameters)
 load('../fits/GrowthParams.mat')
@@ -35,7 +35,7 @@ for d = 1:nd
 end
 
 % Check for previous fit
-path = '../fits/PhageAttackParams.mat';
+path = '../fits/PhageAttackParams_onlyDelta.mat';
 if exist(path, 'file')
     load(path, 'y', 'fitImprovement');
     y0 = y(1:3);
@@ -50,15 +50,15 @@ y0 = [y0 T_i];
 
 % Determine start fit value
 y_old = y0;
-d_old = fitPhageAttack(x, y_old, 1, Time, BF, GFP, false);
+d_old = fitPhageAttack(x, y_old, 3, Time, BF, GFP, false);
 
 % Call minimizier
-y = fminsearch(@(y)fitPhageAttack(x, y, 1, Time, BF, GFP, true), y0, optimset('MaxIter', 10*numel(y0)));
+y = fminsearch(@(y)fitPhageAttack(x, y, 3, Time, BF, GFP, true), y0, optimset('MaxIter', 10*numel(y0)));
 
 % Report change in conditions
 fprintf('Total parameter change: %.3f\n', norm(y-y_old))
 
-d_new = fitPhageAttack(x, y, 1, Time, BF, GFP, false);
+d_new = fitPhageAttack(x, y, 3, Time, BF, GFP, false);
 fitImprovement = 100*(d_old-d_new)/d_old;
 fprintf('Fit improvement: %.3f %%\n', fitImprovement)
 

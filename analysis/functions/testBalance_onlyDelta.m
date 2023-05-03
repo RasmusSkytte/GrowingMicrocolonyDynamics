@@ -30,6 +30,7 @@ tt = tt(1:(end-1)) + diff(tt) / 2;
 
 % Determine the surface nutrient level
 f = @(C)min(1,max(0, (C-p.r)./([p.r(2:end); p.rNp]-p.r)));
+
 nC = nan(size(t));
 for i = 1:numel(nC)
     fC = f(C(i));
@@ -38,8 +39,8 @@ for i = 1:numel(nC)
 end
 
 % Load the fitted values
-load('../fits/PhageAttackParams.mat');
-p = getConfiguration(x, y, 1);
+load('../fits/PhageAttackParams_onlyDelta.mat');
+p = getConfiguration(x, y, 3);
 
 yyaxis left
 plot(ax, tt, v, 'LineWidth', 2);
@@ -54,8 +55,8 @@ ax.YLim = [0 80];
 
 xlabel('Time (h)')
 
-if ~exist('../../figures/Figure S6', 'dir')
-    mkdir('../../figures/Figure S6')
+if ~exist('../../figures/Figure 6/' , 'dir')
+    mkdir('../../figures/Figure 6')
 end
 
-saveas(fh, '../../figures/Figure S6/FigS6.png')
+saveas(fh, '../../figures/Figure 6/Fig6.png')

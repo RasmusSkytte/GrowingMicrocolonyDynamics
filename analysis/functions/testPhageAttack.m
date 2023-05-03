@@ -12,12 +12,10 @@ load('../fits/GrowthParams.mat')
 load('../fits/PhageAttackParams.mat')
 
 % Prepare folders
-if ~exist('../../figures/Figure 4', 'dir')
-    mkdir('../../figures/Figure 4')
-end
 
-if ~exist('../../figures/Figure S4', 'dir')
-    mkdir('../../figures/Figure S4')
+
+if ~exist('../../figures/Figure S5', 'dir')
+    mkdir('../../figures/Figure S5')
 end
 
 
@@ -90,7 +88,7 @@ for i = 1:numel(I)
     text(ax1, 2.5, 350, sprintf('T_i = %.2f h', p.T_i), 'FontSize', 20);
 
     % Save figure
-    saveas(fh1, sprintf('../../figures/Figure S4/Run_%d.png', i))
+    saveas(fh1, sprintf('../../figures/Figure S5/Run_%d.png', i))
 
 
     % Add plots to the main figure
@@ -130,7 +128,7 @@ for i = 1:numel(I)
 
         text(ax3, 2.5, 350, sprintf('T_i = %.2f h', p.T_i), 'FontSize', 20);
 
-        saveas(fh3, sprintf('../../figures/Figure 4/Fig4%s.png', labels{I(i) == [I7_5 I8_0 I8_5 I9_0 I9_5]}))
+       % saveas(fh3, sprintf('../../figures/Figure 5 all fit/Fig5%s.png', labels{I(i) == [I7_5 I8_0 I8_5 I9_0 I9_5]}))
     end
 
     drawnow;

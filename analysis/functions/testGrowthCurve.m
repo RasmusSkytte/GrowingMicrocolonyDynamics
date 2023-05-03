@@ -47,11 +47,11 @@ ylabel('Colony Radius ({\mu}m)')
 
 saveas(fh, '../fits/GrowthParams.png')
 
-sdir = '../../figures/Figure 3';
+sdir = '../../figures/Figure 4';
 if ~exist(sdir, 'dir')
     mkdir(sdir)
 end
-saveas(fh, sprintf('%s/Fig3.png', sdir));
+saveas(fh, sprintf('%s/Fig4.png', sdir));
 
 % Get current chi2 value
 % Locate the points to compare:
