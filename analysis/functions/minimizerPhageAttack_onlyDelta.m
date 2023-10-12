@@ -9,13 +9,13 @@ end
 % Set starting parameters
 
 %    dR        epsilon  nu
-y0 = [30   1    0  ];
+y0 = [30   1    1  ];
 
 % Load the best fitting parameters (bacteria parameters)
 load('../fits/GrowthParams.mat')
 
 % Load the fitting data
-load('../../experiments/PhageData.mat')
+load('../../experiments/PhageData_higherTreshold_1_60.mat')
 
 % Allocate cells for fitting data
 tmp1 = [dataset{:, 1}]; % Time Data
@@ -35,7 +35,7 @@ for d = 1:nd
 end
 
 % Check for previous fit
-path = '../fits/PhageAttackParams_onlyDelta.mat';
+path = '../fits/PhageAttackParams_onlyDelta_higherTreshold_1_60.mat';
 if exist(path, 'file')
     load(path, 'y', 'fitImprovement');
     y0 = y(1:3);

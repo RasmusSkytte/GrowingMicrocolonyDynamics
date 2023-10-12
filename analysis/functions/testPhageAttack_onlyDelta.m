@@ -1,7 +1,7 @@
 close all; clearvars;
 
 % Load the fitting data
-load('../../experiments/PhageData.mat')
+load('../../experiments/PhageData_higherTreshold_1_60.mat')
 nDataSets = numel(dataset);
 labels = {'a', 'b', 'c', 'd', 'e'};
 
@@ -9,15 +9,15 @@ labels = {'a', 'b', 'c', 'd', 'e'};
 load('../fits/GrowthParams.mat')
 
 % Load the phage attack fit
-load('../fits/PhageAttackParams_onlyDelta.mat')
+load('../fits/PhageAttackParams_onlyDelta_higherTreshold_1_60.mat')
 
 % Prepare folders
-if ~exist('../../figures/Figure 5', 'dir')
-    mkdir('../../figures/Figure 5')
+if ~exist('../../figures/Figure 5_onlyDelta_higherTreshold_1_60', 'dir')
+    mkdir('../../figures/Figure 5_onlyDelta_higherTreshold_1_60')
 end
 
-if ~exist('../../figures/Figure S4', 'dir')
-    mkdir('../../figures/Figure S4')
+if ~exist('../../figures/Figure S4_onlyDelta_higherTreshold_1_60', 'dir')
+    mkdir('../../figures/Figure S4_onlyDelta_higherTreshold_1_60')
 end
 
 % Get configration struct
@@ -89,7 +89,7 @@ for i = 1:numel(I)
     text(ax1, 2.5, 350, sprintf('T_i = %.2f h', p.T_i), 'FontSize', 20);
 
     % Save figure
-    saveas(fh1, sprintf('../../figures/Figure S4/Run_%d.png', i))
+    saveas(fh1, sprintf('../../figures/Figure S4_onlyDelta_higherTreshold_1_60/Run_%d.png', i))
 
 
     % Add plots to the main figure
@@ -129,7 +129,7 @@ for i = 1:numel(I)
 
         text(ax3, 2.5, 350, sprintf('T_i = %.2f h', p.T_i), 'FontSize', 20);
 
-        saveas(fh3, sprintf('../../figures/Figure 5/Fig5%s.png', labels{I(i) == [I7_5 I8_0 I8_5 I9_0 I9_5]}))
+        saveas(fh3, sprintf('../../figures/Figure 5OnlyDelta_higherTreshold_1_60/Fig5%s.png', labels{I(i) == [I7_5 I8_0 I8_5 I9_0 I9_5]}))
     end
 
     drawnow;

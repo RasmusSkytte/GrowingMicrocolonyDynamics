@@ -2,7 +2,11 @@ close all; clearvars;
 
 % load the data
 load ../../experiments/data
-GFP_radius = GFP_radius_1_80;
+
+GFP_radius      = GFP_radius_1_80;
+GFP_radius_alt1 = GFP_radius_1_60;
+GFP_radius_alt2 = GFP_radius_2_20;
+
 
 % Replace NaN values
 GFP_radius(isnan(GFP_radius)) = 0;
@@ -53,7 +57,7 @@ for n = 1:25
     plot(ax, TT(f)+dT(n), radius(f, n), 'k', 'Linewidth', 2)
     plot(ax, TT(f)+dT(n), GFP_radius(f, n), 'g', 'Linewidth', 2)
     %     plot([T_i(n) T_i(n)], [0 400], ':k')
- 
+
     % Label graph
     xlabel('Time (hours)')
     ylabel('Radius ({\mu}m)')
@@ -67,22 +71,32 @@ for n = 1:25
 end
 
 % Manuel grouping
-for n = 1:3
+for n = 1:5
 
     switch n
         case 1 % Growth rate runs
             d = [61 62 63 64 65];
             spath = 'GrowthData.mat';
-            
+
         case 2 % Phage attack runs
-            d = [12 13 14 21 22 23 24 25 31 32 33 35 41 42 43 44 51 52 53 54];            
+            d = [12 13 14 21 22 23 24 25 31 32 33 35 41 42 43 44 51 52 53 54];
             spath = 'PhageData.mat';
-            
+
         case 3 % "Outliers"
             d = [11 15 34 45 55];
-            spath = 'OutlierData.mat';        
+            spath = 'OutlierData.mat';
+
+        case 4 % Phage attack runs with higher threshold
+            d = [12 13 14 21 22 23 24 25 31 32 33 35 41 42 43 44 51 52 53 54];
+            spath = 'PhageData_higherTreshold_1_60.mat';
+            %GFP_radius = GFP_radius_alt2;
+
+        case 5 % Phage attack runs with higher threshold
+            d = [12 13 14 21 22 23 24 25 31 32 33 35 41 42 43 44 51 52 53 54];
+            spath = 'PhageData_higherTreshold_2_20.mat';
+           % GFP_radius = GFP_radius_alt4;
     end
-    
+
     % Map the odd indicies
     l = mod(floor(d/10), 2) == 1;
     I = nan(size(d));
@@ -94,12 +108,12 @@ for n = 1:3
     dataset = cell(numel(I), 3);
     cc = lines(numel(I));
     for i = 1:numel(I)
-        
+
         % Store data
         dataset{i, 1} = TT' + dT(I(i));
         dataset{i, 2} = radius(:, I(i));
         dataset{i, 3} = GFP_radius(:, I(i));
-        
+
     end
 
     % Save fitting data

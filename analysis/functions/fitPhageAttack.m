@@ -26,7 +26,7 @@ parfor n = 1:numel(Time)
     R = R(I);
     C = C(I);
 
-    if model == 2
+    if model == 2 | model == 3
         % Volume of dead matter
         % Vd = p.nu * 4 * pi / 3 * (C^3 - R^3)
 

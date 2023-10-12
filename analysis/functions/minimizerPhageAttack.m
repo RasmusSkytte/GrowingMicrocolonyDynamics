@@ -50,15 +50,15 @@ y0 = [y0 T_i];
 
 % Determine start fit value
 y_old = y0;
-d_old = fitPhageAttack(x, y_old, 1, Time, BF, GFP, false);
+d_old = fitPhageAttack(x, y_old, 2, Time, BF, GFP, false);
 
 % Call minimizier
-y = fminsearch(@(y)fitPhageAttack(x, y, 1, Time, BF, GFP, true), y0, optimset('MaxIter', 10*numel(y0)));
+y = fminsearch(@(y)fitPhageAttack(x, y, 2, Time, BF, GFP, true), y0, optimset('MaxIter', 10*numel(y0)));
 
 % Report change in conditions
 fprintf('Total parameter change: %.3f\n', norm(y-y_old))
 
-d_new = fitPhageAttack(x, y, 1, Time, BF, GFP, false);
+d_new = fitPhageAttack(x, y, 2, Time, BF, GFP, false);
 fitImprovement = 100*(d_old-d_new)/d_old;
 fprintf('Fit improvement: %.3f %%\n', fitImprovement)
 
